@@ -85,75 +85,43 @@ h1, h2, h3 {
     }
 }
 
+/* Additional styles for the sparkle and glow effects */
 .crystal-container {
-<<<<<<< HEAD
-    width: 200px;
+    width: 200px; /* Ensure the container is appropriately sized */
     display: block;
     margin: auto;
-    text-decoration: none;
     cursor: pointer;
-=======
-    width: 200px; /* Adjust as needed */
-    display: block;
-    margin: auto;
-    text-decoration: none; /* Removes the link underline */
-    cursor: pointer; /* Changes cursor to indicate it's clickable */
->>>>>>> 5a2475c5d69fa283f7d6079d6b3f0f171c9b14ad
+    text-decoration: none;
 }
 
 .crystal-svg {
     width: 100%;
     height: auto;
-<<<<<<< HEAD
-    transition: transform 2.5s ease-out;
-    transform-origin: 50% 50%;
+      transition: transform 2s ease-out;
+    transform-origin: 50% 50%; /* Center the transformation origin for spinning */
 }
 
 .sparkle {
-    opacity: 0;  // Initially hidden
-    transition: opacity 0.5s ease-in-out, r 0.5s ease-in-out;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+    transform-origin: center; /* Center the transformation origin */
 }
 
 .crystal-container:hover .sparkle {
-    opacity: 1; // Show on hover
-    r: 5; // Increase radius for visibility
-    animation: sparkleGlow 1s infinite alternate;
+    opacity: 1; /* Full visibility on hover */
+    animation: sparklePulsate 2s infinite alternate; /* Apply pulsating effect */
 }
 
-=======
-    transition: transform 3s ease-out; /* Eases out the spinning effect */
-    transform-origin: 50% 50%; /* Ensures rotation around the center */
-}
-
-.spin {
-    transform: rotate(360deg); /* Rotate the SVG 360 degrees */
-}
-
-/* Ensure any additional styles are applied */
-
-
-.sparkle {
-    opacity: 0; /* Sparkle is hidden by default */
-    transition: opacity 0.5s ease-in-out, r 0.5s ease-in-out; /* Smooth transition for sparkle effect */
-}
-
-.crystal-container:hover .sparkle {
-    opacity: 1; /* Sparkle appears on hover */
-    r: 5; /* Size of sparkle */
-    animation: sparkleGlow 1s infinite alternate; /* Pulsing glow animation */
-}
-
-/* Keyframes for the pulsing glow animation */
-@keyframes sparkleGlow {
-    from {
-        r: 2;
-        opacity: 0.7;
+@keyframes sparklePulsate {
+    0%, 100% {
+        opacity: 0.5; /* Less visible at start and end */
     }
-    to {
-        r: 5;
-        opacity: 1;
+    50% {
+        opacity: 1; /* Fully visible at midpoint */
     }
 }
+
+
 
 a {
     color: #069;
