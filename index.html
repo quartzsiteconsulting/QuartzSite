@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuartzSite Consulting</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Font Link for Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Google Font Link for Open Sans -->
+    <!-- Google Font Link for both Roboto and Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,20 +20,11 @@
           <p>Crystal clear content.</p>
     </header>
 
-<section id="about">
 <h2>About Us</h2>
-    <p><strong>QuartzSite Consulting</strong> is a dynamic multimedia, marketing, and web design studio specializing in creating high-impact digital content.</p>
-    <p>QuartzSite excels in producing engaging ad creatives, visually stunning video sales letters (VSLs), and beautiful websites.</p>
-    <p>QuartzSite's unique blend of creative multimedia expertise and strategic marketing insights enables it to deliver powerful, visually captivating stories that resonate across diverse platforms, ensuring clients achieve both artistic and commercial success.</p>
-    </section>    
-    
-    <section id="mission">
-    <h2>Mission</h2>
-    <p>Transform your vision into reality. QuartzSite focuses on the power of creativity and innovation. Fresh ideas are the cornerstone of our approach.</p>
-    <p>We specialize in harnessing imaginative concepts and unique solutions to propel our clients' projects forward. Our studio thrives on turning dreams into tangible results, using a blend of artistic flair and strategic thinking to deliver exceptional outcomes. At QuartzSite, we believe fun can be a creative catalyst, so we never refrain from having some of it!</p>
-    </section>
-    
-    <section id="portfolio">
+    <p>QuartzSite Consulting excels in the strategic architecture of information systems and the seamless migration of complex data landscapes. Our focus on data structuring and streamlined migrations allows for the creation of accessible, functional, and sustainable digital environments.</p>
+<p>Expertise in aligning large-scale digital properties with modern web standards ensures that our solutions are not only effective today but are also adaptable for the demands of tomorrow. Our approach is rooted in the meticulous organization of information, enabling intuitive user experiences and robust operational continuity.</p>
+<p>At the forefront of enterprise-level SharePoint deployments, we excel in elevating digital workspaces to enhance collaboration and productivity. QuartzSite's comprehensive support and strategic insights are integral to transforming and future-proofing the digital assets of any organization.</p>
+
     <h2>Portfolio</h2>
     <article>
             <figure>
@@ -45,7 +34,7 @@
                 <figcaption>Brampton.ca Homepage</figcaption>
             </figure>
             <h3>Brampton.ca SharePoint Upgrade</h3>
-            <p>Supported the comprehensive migration of Brampton’s municipal website, encompassing over 2500 webpages, from SharePoint 2010 to the latest SharePoint Server Edition.</p>
+            <p>Supported the comprehensive migration of Brampton’s municipal website, encompassing over 2500 webpages.</p>
             <p>This project involved detailed planning, stakeholder engagement, and the use of advanced migration tools to ensure a seamless transition while enhancing accessibility, functionality, and user experience. The successful upgrade significantly improved the site’s performance and maintainability, aligning it with contemporary web standards and city governance needs.</p>
         </article>
         <article>
@@ -58,16 +47,58 @@
             <h3>Flynn Group of Companies SharePoint Upgrade</h3>
             <p>Oversaw the migration of 30+ branches and 15+ departments from SharePoint On-Premise to SharePoint Online. This comprehensive upgrade encompassed not just migration but also extended to providing ongoing support and creating extensive resources including technical documentation, training modules, video tutorials, and change management strategies. This project streamlined operations, enhanced collaboration, and ensured a smooth transition with minimal disruption, equipping all levels of the organization with the tools and knowledge needed for effective utilization of the new system.</p>
         </article>
-    </section>
-        
-    <section id="contact">
-                <h2>Contact</h2>
-            </section>
+				
+<h2>Contact</h2>
+<a href="mailto:quartzsiteconsulting@gmail.com" class="quartz-button" aria-label="Contact Us">Email Us</a>
+</main>
     <footer>
-
         <p>Copyright © 2024 QuartzSite Consulting Inc.</p>
-        <p>Email: <a href="mailto:quartzsiteconsulting@gmail.com">quartzsiteconsulting@gmail.com</a></p>
+		<a href="#" class="crystal-container" id="crystal-container" aria-label="Email Us">
+    <svg viewBox="0 0 100 100" class="crystal-svg" id="crystal">
+              <defs>
+            <linearGradient id="crystal-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#e8f8ff; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#b3cde0; stop-opacity:1" />
+            </linearGradient>
+            <radialGradient id="sparkle-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="10%" style="stop-color:#ffffff; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ffffff; stop-opacity:0" />
+            </radialGradient>
+            <!-- Define a filter for the glow effect -->
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+          <!-- Hexagon outer shape -->
+         <polygon points="50,10 80,25 80,75 50,90 20,75 20,25" fill="url(#crystal-gradient)" stroke="#6497b1" stroke-width="2"/>
+        <!-- Inner lines for crystalline effect -->
+        <line x1="50" y1="10" x2="50" y2="90" stroke="#6497b1" stroke-width="1"/>
+        <line x1="20" y1="25" x2="80" y2="25" stroke="#6497b1" stroke-width="1"/>
+        <line x1="20" y1="75" x2="80" y2="75" stroke="#6497b1" stroke-width="1"/>
+        <line x1="50" y1="10" x2="80" y2="75" stroke="#6497b1" stroke-width="1"/>
+        <line x1="50" y1="10" x2="20" y2="75" stroke="#6497b1" stroke-width="1"/>
+		<!-- Circle for sparkle effect -->
+        <circle cx="50" cy="20" r="0" fill="url(#sparkle-gradient)" class="sparkle" filter="url(#glow)" />
+    </svg>
+</a>
+<script>
+document.getElementById('crystal-container').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevents the default anchor link behavior
+    var crystalSvg = this.querySelector('.crystal-svg');
+
+    // Start the spin animation
+    crystalSvg.style.transform = 'rotate(' + (Math.random() * 3333 + 360) + 'deg)';
+
+    // Reset the animation to allow for future spins
+    crystalSvg.addEventListener('transitionend', function() {
+        crystalSvg.style.transform = '';
+    }, { once: true });
+});
+</script>
     </footer>
-</main>        
 </body>
 </html>

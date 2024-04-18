@@ -53,14 +53,83 @@ h1, h2, h3 {
     width: 120px; /* Fixed width; adjust as needed */
 }
 
+.quartz-button {
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    color: #fff; /* Text color */
+    background-color: #555; /* Button color */
+    border: none;
+    cursor: pointer;
+    border-radius: 30px; /* Gives the button rounded edges */
+    text-decoration: none; /* Removes underline from anchor tag */
+    transition: background-color 0.3s; /* Smooth background color transition on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow to lift the button off the page */
+}
+
+.quartz-button:hover {
+    background-color: #666; /* Slightly darker button color on hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover for a "raised" effect */
+}
+
+.quartz-button:focus {
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.3); /* Glow effect on focus */
+}
+
+@media screen and (max-width: 600px) {
+    .quartz-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+.crystal-container {
+    width: 200px;
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.crystal-svg {
+    width: 100%;
+    height: auto;
+    transition: transform 2.5s ease-out;
+    transform-origin: 50% 50%;
+}
+
+.sparkle {
+    opacity: 0;  // Initially hidden
+    transition: opacity 0.5s ease-in-out, r 0.5s ease-in-out;
+}
+
+.crystal-container:hover .sparkle {
+    opacity: 1; // Show on hover
+    r: 5; // Increase radius for visibility
+    animation: sparkleGlow 1s infinite alternate;
+}
+
+@keyframes sparkleGlow {
+    from {
+        r: 2;
+        opacity: 0.7;
+    }
+    to {
+        r: 7;
+        opacity: 1;
+    }
+}
+
 a {
     color: #069;
 }
 
 a:visited {
-    color: #561B6B;
+    color: #ffffff;
 }
 
 a:hover {
-    color: #DD4B2B;
+    color: #ffffff;
 }
