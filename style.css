@@ -86,16 +86,25 @@ h1, h2, h3 {
 }
 
 .crystal-container {
+<<<<<<< HEAD
     width: 200px;
     display: block;
     margin: auto;
     text-decoration: none;
     cursor: pointer;
+=======
+    width: 200px; /* Adjust as needed */
+    display: block;
+    margin: auto;
+    text-decoration: none; /* Removes the link underline */
+    cursor: pointer; /* Changes cursor to indicate it's clickable */
+>>>>>>> 5a2475c5d69fa283f7d6079d6b3f0f171c9b14ad
 }
 
 .crystal-svg {
     width: 100%;
     height: auto;
+<<<<<<< HEAD
     transition: transform 2.5s ease-out;
     transform-origin: 50% 50%;
 }
@@ -111,13 +120,37 @@ h1, h2, h3 {
     animation: sparkleGlow 1s infinite alternate;
 }
 
+=======
+    transition: transform 3s ease-out; /* Eases out the spinning effect */
+    transform-origin: 50% 50%; /* Ensures rotation around the center */
+}
+
+.spin {
+    transform: rotate(360deg); /* Rotate the SVG 360 degrees */
+}
+
+/* Ensure any additional styles are applied */
+
+
+.sparkle {
+    opacity: 0; /* Sparkle is hidden by default */
+    transition: opacity 0.5s ease-in-out, r 0.5s ease-in-out; /* Smooth transition for sparkle effect */
+}
+
+.crystal-container:hover .sparkle {
+    opacity: 1; /* Sparkle appears on hover */
+    r: 5; /* Size of sparkle */
+    animation: sparkleGlow 1s infinite alternate; /* Pulsing glow animation */
+}
+
+/* Keyframes for the pulsing glow animation */
 @keyframes sparkleGlow {
     from {
         r: 2;
         opacity: 0.7;
     }
     to {
-        r: 7;
+        r: 5;
         opacity: 1;
     }
 }

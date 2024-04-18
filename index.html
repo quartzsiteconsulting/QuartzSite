@@ -86,6 +86,7 @@
     </svg>
 </a>
 <script>
+<<<<<<< HEAD
 document.getElementById('crystal-container').addEventListener('click', function(event) {
     event.preventDefault();  // Prevents the default anchor link behavior
     var crystalSvg = this.querySelector('.crystal-svg');
@@ -98,6 +99,20 @@ document.getElementById('crystal-container').addEventListener('click', function(
         crystalSvg.style.transform = '';
     }, { once: true });
 });
+=======
+    document.getElementById('crystal-container').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevents the default anchor link behavior
+        var crystalSvg = this.querySelector('.crystal-svg');
+
+        // Start the spin animation
+        crystalSvg.style.transform = 'rotate(' + (Math.random() * 3333 + 360) + 'deg)';
+
+        // Reset the animation to allow for future spins
+        crystalSvg.addEventListener('transitionend', function() {
+            crystalSvg.style.transform = '';
+        }, { once: true });
+    });
+>>>>>>> 5a2475c5d69fa283f7d6079d6b3f0f171c9b14ad
 </script>
     </footer>
 </body>
