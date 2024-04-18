@@ -85,6 +85,21 @@ h1, h2, h3 {
     }
 }
 
+.crystal-container {
+    width: 200px; /* Adjust as needed */
+    display: block;
+    margin: auto;
+    text-decoration: none; /* Removes the link underline */
+    cursor: pointer; /* Changes cursor to indicate it's clickable */
+}
+
+.crystal-svg {
+    width: 100%;
+    height: auto;
+    transition: transform 3s ease-out; /* Eases out the spinning effect */
+    transform-origin: 50% 50%; /* Ensures rotation around the center */
+}
+
 a {
     color: #069;
 }

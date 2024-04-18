@@ -47,12 +47,36 @@
             <h3>Flynn Group of Companies SharePoint Upgrade</h3>
             <p>Oversaw the migration of 30+ branches and 15+ departments from SharePoint On-Premise to SharePoint Online. This comprehensive upgrade encompassed not just migration but also extended to providing ongoing support and creating extensive resources including technical documentation, training modules, video tutorials, and change management strategies. This project streamlined operations, enhanced collaboration, and ensured a smooth transition with minimal disruption, equipping all levels of the organization with the tools and knowledge needed for effective utilization of the new system.</p>
         </article>
-		
+				
 <h2>Contact</h2>
 <a href="mailto:quartzsiteconsulting@gmail.com" class="quartz-button" aria-label="Contact Us">Email Us</a>
 </main>
     <footer>
         <p>Copyright © 2024 QuartzSite Consulting Inc.</p>
+		<a href="#" class="crystal-container" id="crystal-container" aria-label="Email Us">
+    <svg viewBox="0 0 100 100" class="crystal-svg" id="crystal">
+        <defs>
+            <!-- Gradient definitions omitted for brevity -->
+        </defs>
+        <!-- Hexagon outer shape -->
+        <polygon points="50,10 80,25 80,75 50,90 20,75 20,25" fill="url(#crystal-gradient)" stroke="#6497b1" stroke-width="2"/>
+        <!-- Inner lines and other elements omitted for brevity -->
+    </svg>
+</a>
+<script>
+    document.getElementById('crystal-container').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevents the default anchor link behavior
+        var crystalSvg = this.querySelector('.crystal-svg');
+
+        // Start the spin animation
+        crystalSvg.style.transform = 'rotate(' + (Math.random() * 1200 + 360) + 'deg)';
+
+        // Reset the animation to allow for future spins
+        crystalSvg.addEventListener('transitionend', function() {
+            crystalSvg.style.transform = '';
+        }, { once: true });
+    });
+</script>
     </footer>
 </body>
 </html>
