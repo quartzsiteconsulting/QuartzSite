@@ -62,12 +62,30 @@
         
     <section id="contact">
                 <h2>Contact</h2>
-				 <a href="mailto:quartzsiteconsulting@gmail.com" class="quartz-button" aria-label="Contact Us">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="50" cy="50" r="45" fill="#DDDDDD" stroke="#AAAAAA" stroke-width="2" />
-        </svg>
-        Email Us
-    </a>
+<a href="mailto:quartzsiteconsulting@gmail.com" class="quartz-button" aria-label="Contact Us">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+            <radialGradient id="quartzTexture" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:#FFF; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#DDD; stop-opacity:1" />
+            </radialGradient>
+            <filter id="bevel" x="0" y="0" width="200%" height="200%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+                <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75" specularExponent="20" lighting-color="#ffffff" result="specOut">
+                    <fePointLight x="-5000" y="-10000" z="20000"/>
+                </feSpecularLighting>
+                <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+                <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+                <feMerge>
+                    <feMergeNode in="litPaint"/>
+                    <feMergeNode in="blur"/>
+                </feMerge>
+            </filter>
+        </defs>
+        <circle cx="50" cy="50" r="45" fill="url(#quartzTexture)" stroke="#AAAAAA" stroke-width="2" filter="url(#bevel)"/>
+    </svg>
+    Email Us
+</a>
             </section>
 </body>
     <footer>
