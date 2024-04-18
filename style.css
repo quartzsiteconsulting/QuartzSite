@@ -53,6 +53,47 @@ h1, h2, h3 {
     width: 120px; /* Fixed width; adjust as needed */
 }
 
+.quartz-button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+.quartz-button svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.quartz-button:hover svg circle {
+    fill: #CCCCCC;
+}
+
+.quartz-button:focus {
+    outline: none;
+}
+
+.quartz-button:focus-visible svg circle {
+    stroke: #333333;
+}
+
+@media screen and (max-width: 600px) {
+    .quartz-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
 a {
     color: #069;
 }
