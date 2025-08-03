@@ -128,10 +128,10 @@ a {
 }
 
 a:visited {
-    color: #ffffff;
+    color: #6b5b95;
 }
 
 a:hover {
-    color: #0055aa; /* deep blue or anything that contrasts your background */
-    text-decoration: underline; /* optional: gives a clear hover state */
+    color: #0055aa;
+    text-decoration: underline;
 }
