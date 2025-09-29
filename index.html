@@ -2,60 +2,322 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QuartzSite Consulting</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QuartzSite — Practical A11y & Martech Tools</title>
+  <meta name="description" content="QuartzSite: accessible, client-ready web tools. Contrast, a11y, meta/OG, JSON-LD, UTM, sitemap, minify, ASCII generator." />
+  <meta name="theme-color" content="#0b0f14" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0b0f14; --elev:#111720; --muted:#8892a6; --text:#e6eef8;
+      --brand:#6ec3ff; --brand2:#97f0ff; --line:rgba(255,255,255,.10);
+      --radius:18px; --shadow:0 10px 30px rgba(3,8,20,.35);
+      --focus:#e6eef8; --focus-bg:rgba(151,240,255,.18);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; background:var(--bg); color:var(--text);
+         font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; line-height:1.6}
+    a{color:var(--brand); text-decoration:none} a:hover{text-decoration:underline}
+
+    /* Skip link */
+    .skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:12px; top:12px; width:auto; height:auto; padding:10px 14px; background:var(--focus-bg); border:1px solid var(--brand); border-radius:10px}
+
+    /* Nav */
+    .top-nav{position:sticky; top:0; z-index:1000; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(180deg, rgba(11,15,20,.90), rgba(11,15,20,.70)); border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:1100px; margin:0 auto; padding:12px 20px env(safe-area-inset-bottom);
+      display:flex; align-items:center; justify-content:space-between}
+    .logo{height:34px; width:auto; display:block}
+    .nav-cta{display:flex; gap:10px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px;
+      border:1px solid var(--line); background:#0f141c; color:var(--text)}
+    .btn[aria-current="page"]{outline:2px solid var(--brand); outline-offset:2px}
+
+    /* Hero */
+    header.hero{position:relative; overflow:hidden}
+    header.hero::before{content:""; position:absolute; inset:-20%; filter:blur(30px);
+      background:radial-gradient(60% 40% at 80% 20%, rgba(151,240,255,.15), transparent 60%),
+                 radial-gradient(40% 60% at 20% 80%, rgba(110,195,255,.08), transparent 60%),
+                 conic-gradient(from 180deg at 50% 50%, rgba(255,255,255,.05), transparent 30% 70%, rgba(255,255,255,.05));
+      animation:drift 22s linear infinite}
+    @keyframes drift{to{transform:rotate(1turn)}}
+    .hero-inner{max-width:1100px; margin:0 auto; padding:68px 20px 24px; text-align:center}
+    h1{font-weight:800; font-size:clamp(34px,6vw,64px); line-height:1.05; margin:.2em 0 .2em}
+    .grad{background:linear-gradient(90deg,var(--brand),var(--brand2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .sub{color:#cfd9ea; max-width:820px; margin:0 auto}
+
+    /* Layout */
+    main{display:block}
+    section{max-width:1100px; margin:0 auto; padding:22px 20px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:14px}
+    .card{grid-column:span 12; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--line); border-radius:var(--radius); padding:18px; position:relative; overflow:hidden}
+    @media(min-width:780px){ .span-6{grid-column:span 6} .span-12{grid-column:span 12} }
+    .card h2,.card h3{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    input, textarea, select{width:100%; background:#0f141c; color:var(--text); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font:inherit}
+    input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible{outline:3px solid var(--focus); outline-offset:2px}
+    textarea{min-height:120px}
+    label{font-size:12px; color:var(--muted); display:block; margin:4px 0}
+    .small{font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .button{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#131a23; color:var(--text); cursor:pointer}
+    .button.primary{background:linear-gradient(180deg, var(--brand), var(--brand2)); color:#001018; border:none; box-shadow:var(--shadow)}
+    pre{background:#0f141c; border:1px solid var(--line); border-radius:12px; padding:12px; overflow:auto; white-space:pre-wrap}
+    .divider{height:1px; background:var(--line); margin:18px 0}
+
+    /* Footer & crystal */
+    footer{border-top:1px solid var(--line); padding:28px 20px 48px; margin-top:20px; text-align:center}
+    .crystal-container{display:inline-block; width:120px; margin-top:8px; cursor:pointer}
+    .crystal-svg{width:100%; height:auto; transform-origin:50% 50%; transition:transform 900ms cubic-bezier(.2,.8,.2,1)}
+    .sparkle{opacity:.0; transition:opacity .6s ease}
+    .crystal-container:hover .sparkle{opacity:1}
+
+    @media (prefers-contrast: more){ .card, .btn, .button{border-color:#9fe6ff} }
+    @media (prefers-reduced-motion: reduce){ header.hero::before{animation:none} .crystal-svg{transition:none} }
+  </style>
 </head>
 <body>
-  <nav class="top-nav">
-    <a href="./">
-      <img src="logo.webp" alt="QuartzSite Consulting Logo" class="logo" />
-    </a>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="top-nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="./" aria-label="QuartzSite Home">
+        <img src="logo.webp" alt="QuartzSite Consulting Logo" class="logo" />
+      </a>
+      <div class="nav-cta">
+        <a class="btn" href="#tools" aria-current="page">Tools</a>
+      </div>
+    </div>
   </nav>
 
-  <main class="content">
-    <header>
-      <h1>QuartzSite Consulting Inc.</h1>
-      <p>Crystal clear content.</p>
-    </header>
+  <header class="hero" role="banner">
+    <div class="hero-inner">
+      <h1><span class="grad">QuartzSite</span> — We are page builders. Powered by AI.</h1>
+      <p class="sub">Here are a few everyday helpers I use in real projects. Light, accessible, and ready to copy-paste into your workflow.</p>
+    </div>
+  </header>
 
-    <section>
-      <h2>About Us</h2>
-     <p>QuartzSite Consulting is about crafting experiences that resonate across sight, sound, and story.  
-  From cinematic drone footage, stop-motion, and time-lapse sequences to immersive slow-motion visuals, our media captures moments with precision and style.  
-  We extend that same clarity into sound, building distinctive audio branding that strengthens identity and creates lasting impressions.  
-  On the digital front, we design and develop websites with marketing, SEO, and content strategy built in — tools that not only look sharp but perform.  
-  Whether through media, sound, or web, our mission is the same: to distill complexity into powerful, memorable communication.</p>
+  <main id="main" tabindex="-1">
+    <section id="tools" aria-labelledby="tools-title">
+      <h2 id="tools-title" class="small" style="position:absolute;left:-9999px">Tools</h2>
+      <div class="grid">
+        <!-- A11y Inspector -->
+        <article class="card span-6" aria-labelledby="a11y-h">
+          <h3 id="a11y-h">Accessibility Inspector <span class="small">(WCAG helpers)</span></h3>
+          <p class="muted">Drop in HTML; get quick flags for missing <code>alt</code>, heading jumps, unlabeled inputs, low inline contrast, and a landmark summary.</p>
+          <label for="a11y-input">HTML to inspect</label>
+          <textarea id="a11y-input" spellcheck="false" aria-describedby="a11y-help" placeholder="&lt;!DOCTYPE html&gt;... or any HTML snippet"></textarea>
+          <p id="a11y-help" class="small">Runs entirely in your browser.</p>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="runA11y()">Run check</button>
+            <button type="button" class="button" onclick="exampleA11y()">Load example</button>
+          </div>
+          <div class="divider"></div>
+          <div id="a11y-results" class="small" role="status" aria-live="polite">No results yet.</div>
+        </article>
+
+        <!-- Contrast Checker -->
+        <article class="card span-6" aria-labelledby="cc-h">
+          <h3 id="cc-h">Color Contrast Checker <span class="small">AA/AAA</span></h3>
+          <p class="muted">Test hex pairs, preview the combo, and see pass/fail for normal and large text.</p>
+          <div class="row">
+            <div style="flex:1">
+              <label for="fg">Foreground (#hex)</label>
+              <input id="fg" inputmode="text" placeholder="#e6eef8" value="#e6eef8" />
+            </div>
+            <div style="flex:1">
+              <label for="bg">Background (#hex)</label>
+              <input id="bg" inputmode="text" placeholder="#0b0f14" value="#0b0f14" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="checkContrast()">Check</button>
+            <button type="button" class="button" onclick="swapColors()">Swap</button>
+          </div>
+          <div class="divider"></div>
+          <div id="contrast-results" class="small" role="status" aria-live="polite">Enter colors to evaluate WCAG ratios.</div>
+          <div id="contrast-preview" style="margin-top:10px; padding:14px; border:1px solid var(--line); border-radius:12px">Preview — The quick brown fox</div>
+        </article>
+
+        <!-- Meta/OG Generator -->
+        <article class="card span-6" aria-labelledby="meta-h">
+          <h3 id="meta-h">Meta + Open Graph Generator <span class="small">SEO basics</span></h3>
+          <p class="muted">Produce clean, copy-paste meta tags for search, social, and link previews.</p>
+          <div class="row">
+            <div style="flex:1"><label for="meta-title">Title</label><input id="meta-title" placeholder="QuartzSite Consulting"/></div>
+            <div style="flex:1"><label for="meta-url">URL</label><input id="meta-url" type="url" placeholder="https://example.com"/></div>
+          </div>
+          <label for="meta-desc">Description</label>
+          <input id="meta-desc" placeholder="One sentence that sells the page." />
+          <div class="row">
+            <div style="flex:1"><label for="meta-image">Image URL</label><input id="meta-image" type="url" placeholder="https://example.com/cover.jpg"/></div>
+            <div style="flex:1"><label for="meta-twitter">Twitter @</label><input id="meta-twitter" placeholder="@yourhandle"/></div>
+          </div>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="genMeta()">Generate</button>
+            <button type="button" class="button" onclick="copyOut('meta-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="meta-out" class="small" aria-live="polite">&lt;!-- Generated tags will appear here --&gt;</pre>
+        </article>
+
+        <!-- JSON-LD Generator -->
+        <article class="card span-6" aria-labelledby="jsonld-h">
+          <h3 id="jsonld-h">JSON-LD Generator <span class="small">Organization / LocalBusiness / ProfessionalService / RealEstateAgent</span></h3>
+          <p class="muted">Structured data for richer listings. Choose a type and fill in the basics.</p>
+          <div class="row">
+            <div style="flex:1"><label for="org-name">Name</label><input id="org-name" placeholder="QuartzSite Consulting"/></div>
+            <div style="flex:1"><label for="org-url">Website</label><input id="org-url" type="url" placeholder="https://example.com"/></div>
+          </div>
+          <div class="row">
+            <div style="flex:1"><label for="org-logo">Logo URL</label><input id="org-logo" placeholder="/logo.webp"/></div>
+            <div style="flex:1"><label for="org-type">Type</label>
+              <select id="org-type">
+                <option>Organization</option>
+                <option>LocalBusiness</option>
+                <option>ProfessionalService</option>
+                <option>RealEstateAgent</option>
+              </select>
+            </div>
+          </div>
+          <label for="org-same">SameAs (comma-separated profiles)</label>
+          <input id="org-same" placeholder="https://linkedin.com/..., https://github.com/..."/>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="genJSONLD()">Generate</button>
+            <button type="button" class="button" onclick="copyOut('jsonld-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="jsonld-out" class="small" aria-live="polite">/* JSON-LD will appear here */</pre>
+        </article>
+
+        <!-- UTM Builder -->
+        <article class="card span-6" aria-labelledby="utm-h">
+          <h3 id="utm-h">UTM Builder <span class="small">MarTech</span></h3>
+          <p class="muted">Append campaign parameters the safe way—no guesswork, no typos.</p>
+          <label for="utm-url">Base URL</label>
+          <input id="utm-url" type="url" placeholder="https://example.com/landing"/>
+          <div class="row">
+            <div style="flex:1"><label for="utm-source">Source</label><input id="utm-source" placeholder="newsletter"/></div>
+            <div style="flex:1"><label for="utm-medium">Medium</label><input id="utm-medium" placeholder="email"/></div>
+          </div>
+          <div class="row">
+            <div style="flex:1"><label for="utm-campaign">Campaign</label><input id="utm-campaign" placeholder="fall_launch"/></div>
+            <div style="flex:1"><label for="utm-content">Content (optional)</label><input id="utm-content" placeholder="cta_top"/></div>
+          </div>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="buildUTM()">Build URL</button>
+            <button type="button" class="button" onclick="copyOut('utm-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="utm-out" class="small" aria-live="polite">/* Your tracked URL will appear here */</pre>
+        </article>
+
+        <!-- Sitemap.xml Generator -->
+        <article class="card span-6" aria-labelledby="sm-h">
+          <h3 id="sm-h">Sitemap Generator <span class="small">robots-friendly</span></h3>
+          <p class="muted">Turn a list of paths into a valid <code>sitemap.xml</code> with sensible defaults.</p>
+          <label for="site-url">Site URL (no trailing slash)</label>
+          <input id="site-url" type="url" placeholder="https://example.com"/>
+          <label for="site-paths">Paths (one per line)</label>
+          <textarea id="site-paths" placeholder="/
+/about
+/contact"></textarea>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="genSitemap()">Generate</button>
+            <button type="button" class="button" onclick="copyOut('sitemap-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="sitemap-out" class="small" aria-live="polite"><!-- sitemap.xml will appear here --></pre>
+        </article>
+
+        <!-- HTML Minifier -->
+        <article class="card span-6" aria-labelledby="min-h">
+          <h3 id="min-h">HTML Minifier <span class="small">performance</span></h3>
+          <p class="muted">Paste HTML; get a compact version you can ship or embed quickly.</p>
+          <label for="min-in">Paste HTML</label>
+          <textarea id="min-in" placeholder="Paste HTML here" spellcheck="false"></textarea>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="minifyHTML()">Minify</button>
+            <button type="button" class="button" onclick="copyOut('min-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="min-out" class="small" aria-live="polite">/* Minified HTML will appear here */</pre>
+        </article>
+
+        <!-- ASCII Randomizer (after Minifier) -->
+        <article class="card span-6" aria-labelledby="ascii-h">
+          <h3 id="ascii-h">ASCII Randomizer <span class="small">procedural grid</span></h3>
+          <p class="muted">Quick 8×8–64×64 text art for loaders, favicons, code comments, or fun.</p>
+          <div class="row">
+            <div style="flex:1">
+              <label for="ascii-w">Width (cols)</label>
+              <input id="ascii-w" type="number" min="4" max="64" step="1" value="16" />
+            </div>
+            <div style="flex:1">
+              <label for="ascii-hgt">Height (rows)</label>
+              <input id="ascii-hgt" type="number" min="4" max="64" step="1" value="16" />
+            </div>
+          </div>
+          <div class="row">
+            <div style="flex:1">
+              <label for="ascii-charset">Charset</label>
+              <input id="ascii-charset" value=" .:-=+*#%@" />
+            </div>
+            <div style="flex:1">
+              <label for="ascii-density">Density (0–1)</label>
+              <input id="ascii-density" type="number" min="0" max="1" step="0.05" value="0.35"/>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="button primary" onclick="genASCII()">Generate</button>
+            <button type="button" class="button" onclick="copyOut('ascii-out')">Copy</button>
+          </div>
+          <div class="divider"></div>
+          <pre id="ascii-out" class="small" aria-live="polite">/* ASCII art will appear here */</pre>
+        </article>
+      </div>
+      <noscript><p class="small">JavaScript is required for these tools. All processing stays in-browser.</p></noscript>
     </section>
-    
-    <section>
-      <h2>Contact</h2>
-      <p>Have a question or issue? We’re here to help.</p>
-      <p><strong>Email:</strong> <a href="mailto:quartzsite.consulting@gmail.com">quartzsite.consulting@gmail.com</a></p>
+
+    <!-- Sell after tools -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="grid">
+        <article class="card span-12">
+          <h3 id="contact-title">Partner with QuartzSite</h3>
+          <p class="muted">
+            We build small, sharp tools and clear communications that move work forward—accessible by design, adaptable to public-facing sites, intranets, or locked-down environments.
+            End-to-end support across strategy, proposals/RFPs, stakeholder engagement, content and brand storytelling.
+          </p>
+          <div class="row">
+            <a class="button primary" href="mailto:quartzsite.consulting@gmail.com">Start a project</a>
+            <a class="button" href="#tools">Back to tools</a>
+          </div>
+        </article>
+      </div>
     </section>
+  </main>
 
   <footer>
-    <p>Copyright © 2025 QuartzSite Consulting Inc.</p>
-    <a href="#" class="crystal-container" onclick="spinCrystal(event); event.preventDefault();">
-      <!-- Crystal SVG -->
-      <svg viewBox="0 0 100 100" class="crystal-svg">
+    <p class="muted">© 2025 QuartzSite Consulting Inc.</p>
+    <a href="#" class="crystal-container" role="button" aria-label="Spin the crystal" title="Spin the crystal" onclick="spinCrystal(event)">
+      <svg viewBox="0 0 100 100" class="crystal-svg" role="img" aria-labelledby="crystalTitle crystalDesc">
+        <title id="crystalTitle">Quartz Crystal</title>
+        <desc id="crystalDesc">Geometric crystal with soft glow and sparkle.</desc>
         <defs>
           <linearGradient id="crystal-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#e8f8ff; stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#b3cde0; stop-opacity:1" />
+            <stop offset="0%" stop-color="#e8f8ff"/>
+            <stop offset="100%" stop-color="#b3cde0"/>
           </linearGradient>
           <radialGradient id="sparkle-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="10%" style="stop-color:#ffffff; stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#ffffff; stop-opacity:0" />
+            <stop offset="10%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
           </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
+          <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
         <polygon points="50,10 80,25 80,75 50,90 20,75 20,25" fill="url(#crystal-gradient)" stroke="#6497b1" stroke-width="2"/>
         <line x1="50" y1="10" x2="50" y2="90" stroke="#6497b1" stroke-width="1.5"/>
@@ -63,35 +325,174 @@
         <line x1="20" y1="75" x2="80" y2="75" stroke="#6497b1" stroke-width="1.5"/>
         <line x1="50" y1="10" x2="80" y2="75" stroke="#6497b1" stroke-width="1.5"/>
         <line x1="50" y1="10" x2="20" y2="75" stroke="#6497b1" stroke-width="1.5"/>
-        <circle cx="50" cy="20" r="12" fill="url(#sparkle-gradient)" class="sparkle" filter="url(#glow)" />
+        <circle cx="50" cy="20" r="12" fill="url(#sparkle-gradient)" class="sparkle" filter="url(#glow)"/>
       </svg>
     </a>
   </footer>
 
   <script>
-    let rotationDegrees = 0;
-    let lastTimeoutId = null;
+    /* Crystal spin — no scroll to top */
+    function spinCrystal(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      const el=document.querySelector('.crystal-svg');
+      const extra=Math.floor(Math.random()*60);
+      el.style.transform=`rotate(${360+extra}deg)`;
+      setTimeout(()=>{ el.style.transform='rotate(0deg)'; },900);
+    }
 
-    function spinCrystal() {
-      if (lastTimeoutId !== null) {
-        clearTimeout(lastTimeoutId);
-        lastTimeoutId = null;
+    /* Copy helper */
+    function copyOut(id){
+      const el=document.getElementById(id);
+      const txt=el.innerText;
+      if(navigator.clipboard && txt) navigator.clipboard.writeText(txt);
+    }
+
+    /* ---------- A11y Inspector ---------- */
+    function runA11y(){
+      const input=document.getElementById('a11y-input').value.trim();
+      const out=document.getElementById('a11y-results');
+      if(!input){ out.innerHTML='Paste HTML to analyze.'; return; }
+      const doc=new DOMParser().parseFromString(input,'text/html');
+      const issues=[];
+      const htmlEl=doc.documentElement; if(htmlEl && !htmlEl.getAttribute('lang')) issues.push('❗ <code>&lt;html&gt;</code> is missing a <code>lang</code> attribute.');
+      doc.querySelectorAll('img').forEach((img,i)=>{ if(!img.hasAttribute('alt')) issues.push(`❗ <code>&lt;img&gt;</code> #${i+1} missing <code>alt</code>.`); });
+      const hasName = el => (el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')||el.textContent.trim()).length>0;
+      doc.querySelectorAll('button,[role="button"]').forEach((b,i)=>{ if(!hasName(b)) issues.push(`❗ Button #${i+1} has no accessible name.`); });
+      doc.querySelectorAll('a[href]').forEach((a,i)=>{ const href=a.getAttribute('href'); if(!hasName(a)) issues.push(`❗ Link #${i+1} has no accessible name.`); if(href==='#') issues.push(`⚠️ Link #${i+1} uses <code>#</code> only; consider a real target or <code>button</code>.`); });
+      const headings=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')]; let last=0;
+      headings.forEach(h=>{ const lvl=+h.tagName[1]; if(last && lvl>last+1) issues.push(`⚠️ Heading jumps from h${last} to h${lvl}: "${h.textContent.trim().slice(0,60)}"`); last=lvl; });
+      doc.querySelectorAll('input,textarea,select').forEach((el,i)=>{ const id=el.id; const hasLbl=id && doc.querySelector(`label[for="${id}"]`); if(!hasLbl && !el.getAttribute('aria-label')) issues.push(`❗ Form control #${i+1} missing label.`); });
+      doc.querySelectorAll('[style*="color"],[style*="background"]').forEach((el)=>{ const s=el.getAttribute('style')||''; const col=(/color:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1]; const bg=(/background(?:-color)?:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1]; if(col && bg){ const ratio=wcagRatio(col,bg).toFixed(2); if(ratio<4.5) issues.push(`⚠️ Low contrast (${ratio}:1) detected for inline styled <code>${el.tagName.toLowerCase()}</code>.`); }});
+      const landmarks=['header','nav','main','footer','aside'];
+      const found=landmarks.filter(sel=>doc.querySelector(sel)).map(sel=>`<code>${sel}</code>`).join(', ');
+      if(found) issues.unshift(`Landmarks: ${found}`); else issues.push('ℹ️ No landmark elements detected. Consider <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>.');
+      out.innerHTML = issues.length? issues.map(i=>`<div>${i}</div>`).join('') : '✅ No common issues found.';
+    }
+    function exampleA11y(){
+      document.getElementById('a11y-input').value='<!doctype html><html><head><title>Example</title></head><body><h1>Title</h1><h3>Jump</h3><img src="x.jpg"><a href="#"></a><button></button><input id="a"><label>Unbound</label></body></html>';
+      runA11y();
+    }
+
+    /* ---------- Contrast Checker ---------- */
+    function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
+    function srgbToLin(c){ c/=255; return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
+    function relLuminance(hex){ const {r,g,b}=parseHex(hex); return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b); }
+    function wcagRatio(fg,bg){ const L1=relLuminance(fg); const L2=relLuminance(bg); const [a,b] = L1>L2? [L1,L2] : [L2,L1]; return (a+0.05)/(b+0.05); }
+    function checkContrast(){
+      const fg=document.getElementById('fg').value.trim();
+      const bg=document.getElementById('bg').value.trim();
+      if(!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(fg)||!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(bg)){
+        document.getElementById('contrast-results').innerText='Enter valid hex colors.'; return;
       }
-      rotationDegrees += 360 + Math.floor(Math.random() * 50);
-      const crystalSvg = document.querySelector('.crystal-svg');
-      crystalSvg.style.transition = 'transform 1s ease-out';
-      crystalSvg.style.transform = `rotate(${rotationDegrees}deg)`;
-      lastTimeoutId = setTimeout(() => {
-        resetRotation();
-      }, 1000);
+      const ratio=wcagRatio(fg,bg);
+      const aa = ratio>=4.5? '✅ AA (normal text)' : ratio>=3? '⚠️ AA (large text only)' : '❌ fails AA';
+      const aaa = ratio>=7? '✅ AAA (normal text)' : ratio>=4.5? '⚠️ AAA (large text only)' : '❌ fails AAA';
+      document.getElementById('contrast-results').innerText = `Contrast ratio: ${ratio.toFixed(2)}:1 — ${aa} / ${aaa}`;
+      const prev=document.getElementById('contrast-preview'); prev.style.color=fg; prev.style.background=bg; prev.innerHTML='Preview — The quick brown fox';
+    }
+    function swapColors(){ const fg=document.getElementById('fg'); const bg=document.getElementById('bg'); [fg.value,bg.value]=[bg.value,fg.value]; checkContrast(); }
+
+    /* ---------- Meta/OG ---------- */
+    function esc(s){ return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    function genMeta(){
+      const t=document.getElementById('meta-title').value.trim();
+      const d=document.getElementById('meta-desc').value.trim();
+      const u=document.getElementById('meta-url').value.trim();
+      const i=document.getElementById('meta-image').value.trim();
+      const tw=document.getElementById('meta-twitter').value.trim();
+      const tags = [
+        `<meta name="description" content="${esc(d)}">`,
+        `<meta property="og:title" content="${esc(t)}">`,
+        `<meta property="og:description" content="${esc(d)}">`,
+        `<meta property="og:type" content="website">`,
+        u?`<meta property="og:url" content="${esc(u)}">`:'',
+        i?`<meta property="og:image" content="${esc(i)}">`:'',
+        tw?`<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:site" content="${esc(tw)}">`:''
+      ].filter(Boolean).join('\n');
+      document.getElementById('meta-out').innerText = tags;
     }
 
-    function resetRotation() {
-      const crystalSvg = document.querySelector('.crystal-svg');
-      rotationDegrees = 0;
-      crystalSvg.style.transition = 'transform 1s ease-out';
-      crystalSvg.style.transform = 'rotate(0deg)';
+    /* ---------- JSON-LD ---------- */
+    function genJSONLD(){
+      const data = {
+        '@context':'https://schema.org', '@type': document.getElementById('org-type').value,
+        name: document.getElementById('org-name').value.trim(), url: document.getElementById('org-url').value.trim(),
+        logo: document.getElementById('org-logo').value.trim()
+      };
+      const same = document.getElementById('org-same').value.trim(); if(same){ data.sameAs = same.split(',').map(s=>s.trim()).filter(Boolean); }
+      const json = `<script type="application/ld+json">\n${JSON.stringify(data,null,2)}\n<\/script>`;
+      document.getElementById('jsonld-out').innerText = json;
     }
+
+    /* ---------- UTM Builder ---------- */
+    function buildUTM(){
+      const raw=document.getElementById('utm-url').value.trim();
+      if(!raw){ document.getElementById('utm-out').innerText='/* Add a base URL first */'; return; }
+      const base=new URL(raw);
+      const params=new URLSearchParams(base.search);
+      const set=(k,v)=>{ if(v) params.set(k,v) };
+      set('utm_source',document.getElementById('utm-source').value.trim());
+      set('utm_medium',document.getElementById('utm-medium').value.trim());
+      set('utm_campaign',document.getElementById('utm-campaign').value.trim());
+      set('utm_content',document.getElementById('utm-content').value.trim());
+      base.search = params.toString();
+      document.getElementById('utm-out').innerText = base.toString();
+    }
+
+    /* ---------- Sitemap ---------- */
+    function genSitemap(){
+      const site=document.getElementById('site-url').value.trim().replace(/\/$/,'');
+      const lines=document.getElementById('site-paths').value.split(/\n+/).map(p=>p.trim()).filter(Boolean);
+      if(!site){ document.getElementById('sitemap-out').innerText='<!-- add your site URL -->'; return; }
+      const urls = lines.map(p=>`  <url>\n    <loc>${site}${p}</loc>\n    <changefreq>weekly<\/changefreq>\n    <priority>${p==='/'? '1.0':'0.8'}<\/priority>\n  <\/url>`).join('\n');
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n<\/urlset>`;
+      document.getElementById('sitemap-out').innerText = xml;
+    }
+
+    /* ---------- Minify ---------- */
+    function minifyHTML(){
+      const src=document.getElementById('min-in').value; if(!src){ document.getElementById('min-out').innerText='/* paste HTML first */'; return; }
+      let out=src.replace(/\n+/g,' ').replace(/\s{2,}/g,' ').replace(/>\s+</g,'><').trim();
+      out=out.replace(/><(script|link|meta|title|div|section|header|footer)/g,">\n<$1");
+      document.getElementById('min-out').innerText=out;
+    }
+
+    /* ---------- ASCII Randomizer ---------- */
+    function genASCII(){
+      let w = Math.max(4, Math.min(64, parseInt(document.getElementById('ascii-w').value || 16, 10)));
+      let h = Math.max(4, Math.min(64, parseInt(document.getElementById('ascii-hgt').value || 16, 10)));
+      const charset = (document.getElementById('ascii-charset').value || ' .:-=+*#%@').split('');
+      const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value || 0.35)));
+
+      const seed = (Date.now() % 2147483647);
+      let s = seed;
+      const rnd = () => (s = (s * 48271) % 2147483647) / 2147483647;
+
+      let out = '';
+      for (let y = 0; y < h; y++){
+        let row = '';
+        for (let x = 0; x < w; x++){
+          const noise = rnd();
+          const band  = (Math.sin((x + rnd()*2) * 0.45) + Math.cos((y + rnd()*2) * 0.45)) * 0.5 + 0.5;
+          const p = (noise * 0.6 + band * 0.4);
+          if (p < (1 - density)) {
+            row += ' ';
+          } else {
+            const idx = Math.min(charset.length - 1, Math.floor(p * charset.length));
+            row += charset[idx];
+          }
+        }
+        out += row.replace(/\s+$/,'') + '\n';
+      }
+      out += `[${w}×${h}] • seed:${seed.toString(36)}`;
+      document.getElementById('ascii-out').innerText = out;
+    }
+
+    /* Shared color math (used by a11y inline contrast too) */
+    function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
+    function srgbToLin(c){ c/=255; return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
+    function relLuminance(hex){ const {r,g,b}=parseHex(hex); return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b); }
+    function wcagRatio(fg,bg){ const L1=relLuminance(fg); const L2=relLuminance(bg); const [a,b] = L1>L2? [L1,L2] : [L2,L1]; return (a+0.05)/(b+0.05); }
   </script>
 </body>
 </html>
