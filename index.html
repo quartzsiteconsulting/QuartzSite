@@ -256,15 +256,16 @@
         <!-- ASCII Randomizer (after Minifier) -->
         <article class="card span-6" aria-labelledby="ascii-h">
           <h3 id="ascii-h">ASCII Randomizer <span class="small">procedural grid</span></h3>
-          <p class="muted">Generate 8×8 / 16×16 / 32×32 (or custom) ASCII blocks for placeholders, textures, or fun.</p>
+          <p class="muted">Generate 8×8 / 16×16 / 32×32 (or custom up to 64×64) ASCII blocks for placeholders, textures, or fun.</p>
           <div class="row">
             <div style="flex:1">
               <label for="ascii-w">Width (cols)</label>
-              <input id="ascii-w" type="number" min="4" max="64" step="1" value="16" />
+              <input id="ascii-w" type="number" min="1" max="64" step="1" value="16" />
+
             </div>
             <div style="flex:1">
               <label for="ascii-hgt">Height (rows)</label>
-              <input id="ascii-hgt" type="number" min="4" max="64" step="1" value="16" />
+              <input id="ascii-hgt" type="number" min="1" max="64" step="1" value="16" />
             </div>
           </div>
           <div class="row">
@@ -488,27 +489,27 @@
     }
 
     /* ---------- ASCII Randomizer ---------- */
-    function genASCII(){
-    // dimensions (clamped)
-    let w = Math.max(4, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
-    let h = Math.max(4, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
+      function genASCII(){
+    // dimensions (clamped to 1–64)
+    const w = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
+    const h = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
 
     // charset (support Unicode; ensure at least one visible char)
-    let raw = document.getElementById('ascii-charset').value || ' .:-=+*#%@';
-    let tokens = Array.from(raw);
-    if (!tokens.some(ch => !/\s/.test(ch))) { tokens = ['#']; } // fallback if all whitespace
+    let raw = document.getElementById('ascii-charset').value;
+    if (!raw || !Array.from(raw).some(ch => !/\s/.test(ch))) raw = '#';
+    const tokens = Array.from(raw);
 
-    // density gate
+    // density
     const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value) || 0.35));
 
-    // simple seeded-ish rng
+    // seeded-ish rng
     let seed = Date.now() % 2147483647;
     const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
 
     const lines = [];
-    for (let y = 0; y < h; y++) {              // <-- fixed: use y < h
+    for (let y = 0; y < h; y++){
       let line = '';
-      for (let x = 0; x < w; x++) {            // <-- fixed: use x < w (was x > w)
+      for (let x = 0; x < w; x++){
         const t = rand();
         line += (t > density) ? ' ' : tokens[Math.floor(t * tokens.length)];
       }
