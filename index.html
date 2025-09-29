@@ -48,7 +48,7 @@
     .hero-inner{max-width:1100px; margin:0 auto; padding:68px 20px 24px; text-align:center}
     h1{font-weight:800; font-size:clamp(34px,6vw,64px); line-height:1.05; margin:.2em 0 .2em}
     .grad{background:linear-gradient(90deg,var(--brand),var(--brand2)); -webkit-background-clip:text; background-clip:text; color:transparent}
-    .sub{color:#cfd9ea; max-width:820px; margin:0 auto}
+    .sub{color:#cfd9ea; max-width:820px; margin:0.25rem auto 0}
 
     /* Layout */
     main{display:block}
@@ -73,10 +73,11 @@
 
     /* Footer & crystal */
     footer{border-top:1px solid var(--line); padding:28px 20px 48px; margin-top:20px; text-align:center}
-    .crystal-container{display:inline-block; width:120px; margin-top:8px; cursor:pointer}
-    .crystal-svg{width:100%; height:auto; transform-origin:50% 50%; transition:transform 900ms cubic-bezier(.2,.8,.2,1)}
-    .sparkle{opacity:.0; transition:opacity .6s ease}
-    .crystal-container:hover .sparkle{opacity:1}
+    .crystal-container{display:inline-block; width:200px; margin-top:8px; cursor:pointer; text-decoration:none}
+    .crystal-svg{width:100%; height:auto; transform-origin:50% 50%; transition:transform 1s ease-out}
+    .sparkle{opacity:0; transition:opacity 0.5s ease-in-out; transform-origin:center}
+    .crystal-container:hover .sparkle{opacity:1; animation:sparklePulsate 2s infinite alternate}
+    @keyframes sparklePulsate{0%,100%{opacity:.5}50%{opacity:1}}
 
     @media (prefers-contrast: more){ .card, .btn, .button{border-color:#9fe6ff} }
     @media (prefers-reduced-motion: reduce){ header.hero::before{animation:none} .crystal-svg{transition:none} }
@@ -84,9 +85,11 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
   <nav class="top-nav" aria-label="Primary">
     <div class="nav-inner">
       <a href="./" aria-label="QuartzSite Home">
+        <!-- Use your existing path -->
         <img src="logo.webp" alt="QuartzSite Consulting Logo" class="logo" />
       </a>
       <div class="nav-cta">
@@ -97,8 +100,9 @@
 
   <header class="hero" role="banner">
     <div class="hero-inner">
-      <h1><span class="grad">QuartzSite</span> — We are page builders. Powered by AI.</h1>
-      <p class="sub">Here are a few everyday helpers I use in real projects. Light, accessible, and ready to copy-paste into your workflow.</p>
+      <h1><span class="grad">QuartzSite</span> — We are digital builders. Powered by AI.</h1>
+      <p class="sub">Here are a few everyday helpers we use in real projects.</p>
+      <p class="sub">Light, accessible, and ready to copy-paste into your workflow.</p>
     </div>
   </header>
 
@@ -109,7 +113,7 @@
         <!-- A11y Inspector -->
         <article class="card span-6" aria-labelledby="a11y-h">
           <h3 id="a11y-h">Accessibility Inspector <span class="small">(WCAG helpers)</span></h3>
-          <p class="muted">Drop in HTML; get quick flags for missing <code>alt</code>, heading jumps, unlabeled inputs, low inline contrast, and a landmark summary.</p>
+          <p class="muted">Paste HTML → see flags for missing <code>alt</code>, heading jumps, unlabeled inputs, quick inline contrast, and a landmark summary.</p>
           <label for="a11y-input">HTML to inspect</label>
           <textarea id="a11y-input" spellcheck="false" aria-describedby="a11y-help" placeholder="&lt;!DOCTYPE html&gt;... or any HTML snippet"></textarea>
           <p id="a11y-help" class="small">Runs entirely in your browser.</p>
@@ -124,7 +128,7 @@
         <!-- Contrast Checker -->
         <article class="card span-6" aria-labelledby="cc-h">
           <h3 id="cc-h">Color Contrast Checker <span class="small">AA/AAA</span></h3>
-          <p class="muted">Test hex pairs, preview the combo, and see pass/fail for normal and large text.</p>
+          <p class="muted">Test hex pairs, preview the combo, and get pass/fail for normal and large text.</p>
           <div class="row">
             <div style="flex:1">
               <label for="fg">Foreground (#hex)</label>
@@ -147,7 +151,7 @@
         <!-- Meta/OG Generator -->
         <article class="card span-6" aria-labelledby="meta-h">
           <h3 id="meta-h">Meta + Open Graph Generator <span class="small">SEO basics</span></h3>
-          <p class="muted">Produce clean, copy-paste meta tags for search, social, and link previews.</p>
+          <p class="muted">Produce clean, copy-paste tags for search, social, and link previews.</p>
           <div class="row">
             <div style="flex:1"><label for="meta-title">Title</label><input id="meta-title" placeholder="QuartzSite Consulting"/></div>
             <div style="flex:1"><label for="meta-url">URL</label><input id="meta-url" type="url" placeholder="https://example.com"/></div>
@@ -169,7 +173,7 @@
         <!-- JSON-LD Generator -->
         <article class="card span-6" aria-labelledby="jsonld-h">
           <h3 id="jsonld-h">JSON-LD Generator <span class="small">Organization / LocalBusiness / ProfessionalService / RealEstateAgent</span></h3>
-          <p class="muted">Structured data for richer listings. Choose a type and fill in the basics.</p>
+          <p class="muted">Structured data for richer listings. Choose a type and fill in the fields.</p>
           <div class="row">
             <div style="flex:1"><label for="org-name">Name</label><input id="org-name" placeholder="QuartzSite Consulting"/></div>
             <div style="flex:1"><label for="org-url">Website</label><input id="org-url" type="url" placeholder="https://example.com"/></div>
@@ -198,7 +202,7 @@
         <!-- UTM Builder -->
         <article class="card span-6" aria-labelledby="utm-h">
           <h3 id="utm-h">UTM Builder <span class="small">MarTech</span></h3>
-          <p class="muted">Append campaign parameters the safe way—no guesswork, no typos.</p>
+          <p class="muted">Construct clean, encoded campaign URLs you can trust.</p>
           <label for="utm-url">Base URL</label>
           <input id="utm-url" type="url" placeholder="https://example.com/landing"/>
           <div class="row">
@@ -220,7 +224,7 @@
         <!-- Sitemap.xml Generator -->
         <article class="card span-6" aria-labelledby="sm-h">
           <h3 id="sm-h">Sitemap Generator <span class="small">robots-friendly</span></h3>
-          <p class="muted">Turn a list of paths into a valid <code>sitemap.xml</code> with sensible defaults.</p>
+          <p class="muted">Generate a simple <code>sitemap.xml</code> for small sites and micros.</p>
           <label for="site-url">Site URL (no trailing slash)</label>
           <input id="site-url" type="url" placeholder="https://example.com"/>
           <label for="site-paths">Paths (one per line)</label>
@@ -238,7 +242,7 @@
         <!-- HTML Minifier -->
         <article class="card span-6" aria-labelledby="min-h">
           <h3 id="min-h">HTML Minifier <span class="small">performance</span></h3>
-          <p class="muted">Paste HTML; get a compact version you can ship or embed quickly.</p>
+          <p class="muted">Trim whitespace and shrink markup for quick wins.</p>
           <label for="min-in">Paste HTML</label>
           <textarea id="min-in" placeholder="Paste HTML here" spellcheck="false"></textarea>
           <div class="actions">
@@ -252,7 +256,7 @@
         <!-- ASCII Randomizer (after Minifier) -->
         <article class="card span-6" aria-labelledby="ascii-h">
           <h3 id="ascii-h">ASCII Randomizer <span class="small">procedural grid</span></h3>
-          <p class="muted">Quick 8×8–64×64 text art for loaders, favicons, code comments, or fun.</p>
+          <p class="muted">Generate 8×8 / 16×16 / 32×32 (or custom) ASCII blocks for placeholders, textures, or fun.</p>
           <div class="row">
             <div style="flex:1">
               <label for="ascii-w">Width (cols)</label>
@@ -284,27 +288,24 @@
       <noscript><p class="small">JavaScript is required for these tools. All processing stays in-browser.</p></noscript>
     </section>
 
-    <!-- Sell after tools -->
     <section id="contact" aria-labelledby="contact-title">
       <div class="grid">
         <article class="card span-12">
-          <h3 id="contact-title">Partner with QuartzSite</h3>
-          <p class="muted">
-            We build small, sharp tools and clear communications that move work forward—accessible by design, adaptable to public-facing sites, intranets, or locked-down environments.
-            End-to-end support across strategy, proposals/RFPs, stakeholder engagement, content and brand storytelling.
-          </p>
+          <h3 id="contact-title">QuartzSite as your partner</h3>
+          <p class="muted">We build small, sharp tools and clear communications that move work forward, accessible by design and adaptable to public-facing sites, intranets, or locked-down environments. End-to-end support across strategy, proposals/RFPs, stakeholder engagement, content, and brand storytelling.</p>
           <div class="row">
             <a class="button primary" href="mailto:quartzsite.consulting@gmail.com">Start a project</a>
-            <a class="button" href="#tools">Back to tools</a>
+            <a class="button" href="#tools">Explore tools</a>
           </div>
         </article>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p class="muted">© 2025 QuartzSite Consulting Inc.</p>
-    <a href="#" class="crystal-container" role="button" aria-label="Spin the crystal" title="Spin the crystal" onclick="spinCrystal(event)">
+    <!-- Keep at bottom; spin only (no scroll-to-top) -->
+    <a href="#" class="crystal-container" role="button" aria-label="Spin the crystal" title="Spin the crystal" onclick="spinCrystal(event); return false;">
       <svg viewBox="0 0 100 100" class="crystal-svg" role="img" aria-labelledby="crystalTitle crystalDesc">
         <title id="crystalTitle">Quartz Crystal</title>
         <desc id="crystalDesc">Geometric crystal with soft glow and sparkle.</desc>
@@ -331,20 +332,33 @@
   </footer>
 
   <script>
-    /* Crystal spin — no scroll to top */
+    /* ==== Crystal physics (as requested): spin only, no scroll; keeps momentum feel and resets ===== */
+    let rotationDegrees = 0;
+    let lastTimeoutId = null;
     function spinCrystal(e){
       if(e){ e.preventDefault(); e.stopPropagation(); }
-      const el=document.querySelector('.crystal-svg');
-      const extra=Math.floor(Math.random()*60);
-      el.style.transform=`rotate(${360+extra}deg)`;
-      setTimeout(()=>{ el.style.transform='rotate(0deg)'; },900);
+      if (lastTimeoutId !== null) {
+        clearTimeout(lastTimeoutId);
+        lastTimeoutId = null;
+      }
+      rotationDegrees += 360 + Math.floor(Math.random() * 50);
+      const el = document.querySelector('.crystal-svg');
+      el.style.transition = 'transform 1s ease-out';
+      el.style.transform = `rotate(${rotationDegrees}deg)`;
+      lastTimeoutId = setTimeout(()=>{
+        rotationDegrees = 0;
+        el.style.transition = 'transform 1s ease-out';
+        el.style.transform = 'rotate(0deg)';
+      }, 1000);
     }
 
     /* Copy helper */
     function copyOut(id){
       const el=document.getElementById(id);
       const txt=el.innerText;
-      if(navigator.clipboard && txt) navigator.clipboard.writeText(txt);
+      if(navigator.clipboard && typeof navigator.clipboard.writeText==='function'){
+        navigator.clipboard.writeText(txt);
+      }
     }
 
     /* ---------- A11y Inspector ---------- */
@@ -354,18 +368,34 @@
       if(!input){ out.innerHTML='Paste HTML to analyze.'; return; }
       const doc=new DOMParser().parseFromString(input,'text/html');
       const issues=[];
+      // lang on html
       const htmlEl=doc.documentElement; if(htmlEl && !htmlEl.getAttribute('lang')) issues.push('❗ <code>&lt;html&gt;</code> is missing a <code>lang</code> attribute.');
+      // images alt
       doc.querySelectorAll('img').forEach((img,i)=>{ if(!img.hasAttribute('alt')) issues.push(`❗ <code>&lt;img&gt;</code> #${i+1} missing <code>alt</code>.`); });
+      // buttons/links name
       const hasName = el => (el.getAttribute('aria-label')||el.getAttribute('aria-labelledby')||el.textContent.trim()).length>0;
       doc.querySelectorAll('button,[role="button"]').forEach((b,i)=>{ if(!hasName(b)) issues.push(`❗ Button #${i+1} has no accessible name.`); });
       doc.querySelectorAll('a[href]').forEach((a,i)=>{ const href=a.getAttribute('href'); if(!hasName(a)) issues.push(`❗ Link #${i+1} has no accessible name.`); if(href==='#') issues.push(`⚠️ Link #${i+1} uses <code>#</code> only; consider a real target or <code>button</code>.`); });
+      // headings order
       const headings=[...doc.querySelectorAll('h1,h2,h3,h4,h5,h6')]; let last=0;
       headings.forEach(h=>{ const lvl=+h.tagName[1]; if(last && lvl>last+1) issues.push(`⚠️ Heading jumps from h${last} to h${lvl}: "${h.textContent.trim().slice(0,60)}"`); last=lvl; });
+      // form labels
       doc.querySelectorAll('input,textarea,select').forEach((el,i)=>{ const id=el.id; const hasLbl=id && doc.querySelector(`label[for="${id}"]`); if(!hasLbl && !el.getAttribute('aria-label')) issues.push(`❗ Form control #${i+1} missing label.`); });
-      doc.querySelectorAll('[style*="color"],[style*="background"]').forEach((el)=>{ const s=el.getAttribute('style')||''; const col=(/color:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1]; const bg=(/background(?:-color)?:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1]; if(col && bg){ const ratio=wcagRatio(col,bg).toFixed(2); if(ratio<4.5) issues.push(`⚠️ Low contrast (${ratio}:1) detected for inline styled <code>${el.tagName.toLowerCase()}</code>.`); }});
+      // contrast quick-guess for inline styles
+      doc.querySelectorAll('[style*="color"],[style*="background"]').forEach((el)=>{
+        const s=el.getAttribute('style')||'';
+        const col=(/color:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1];
+        const bg=(/background(?:-color)?:\s*(#[0-9a-fA-F]{3,8})/).exec(s)?.[1];
+        if(col && bg){
+          const ratio=wcagRatio(col,bg).toFixed(2);
+          if(ratio<4.5) issues.push(`⚠️ Low contrast (${ratio}:1) detected for inline styled <code>${el.tagName.toLowerCase()}</code>.`);
+        }
+      });
+      // landmark summary
       const landmarks=['header','nav','main','footer','aside'];
       const found=landmarks.filter(sel=>doc.querySelector(sel)).map(sel=>`<code>${sel}</code>`).join(', ');
       if(found) issues.unshift(`Landmarks: ${found}`); else issues.push('ℹ️ No landmark elements detected. Consider <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>.');
+
       out.innerHTML = issues.length? issues.map(i=>`<div>${i}</div>`).join('') : '✅ No common issues found.';
     }
     function exampleA11y(){
@@ -464,31 +494,25 @@
       const charset = (document.getElementById('ascii-charset').value || ' .:-=+*#%@').split('');
       const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value || 0.35)));
 
-      const seed = (Date.now() % 2147483647);
-      let s = seed;
-      const rnd = () => (s = (s * 48271) % 2147483647) / 2147483647;
+      // simple seeded-ish rng using time; enough for playful variation
+      let seed = Date.now() % 2147483647;
+      const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
 
-      let out = '';
-      for (let y = 0; y < h; y++){
-        let row = '';
-        for (let x = 0; x < w; x++){
-          const noise = rnd();
-          const band  = (Math.sin((x + rnd()*2) * 0.45) + Math.cos((y + rnd()*2) * 0.45)) * 0.5 + 0.5;
-          const p = (noise * 0.6 + band * 0.4);
-          if (p < (1 - density)) {
-            row += ' ';
-          } else {
-            const idx = Math.min(charset.length - 1, Math.floor(p * charset.length));
-            row += charset[idx];
-          }
+      let lines = [];
+      for(let y=0;y<h;y++){
+        let line='';
+        for(let x=0;x>w;x++){
+          const t = rand();
+          const idx = Math.min(charset.length-1, Math.floor(t * charset.length));
+          // sparse mode using density gate (more whitespace when lower density)
+          line += (t > density) ? ' ' : charset[idx];
         }
-        out += row.replace(/\s+$/,'') + '\n';
+        lines.push(line);
       }
-      out += `[${w}×${h}] • seed:${seed.toString(36)}`;
-      document.getElementById('ascii-out').innerText = out;
+      document.getElementById('ascii-out').innerText = lines.join('\n');
     }
 
-    /* Shared color math (used by a11y inline contrast too) */
+    // Color math used by both a11y check and contrast
     function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
     function srgbToLin(c){ c/=255; return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
     function relLuminance(hex){ const {r,g,b}=parseHex(hex); return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b); }
