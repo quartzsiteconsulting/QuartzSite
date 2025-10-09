@@ -490,33 +490,39 @@
 
     /* ---------- ASCII Randomizer ---------- */
       function genASCII(){
-    // dimensions (clamped to 1–64)
-    const w = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
-    const h = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
+  // dimensions (clamped to 1–64)
+  const w = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
+  const h = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
 
-    // charset (support Unicode; ensure at least one visible char)
-    let raw = document.getElementById('ascii-charset').value;
-    if (!raw || !Array.from(raw).some(ch => !/\s/.test(ch))) raw = '#';
-    const tokens = Array.from(raw);
+  // charset (support Unicode; ensure at least one visible char)
+  let raw = document.getElementById('ascii-charset').value;
+  if (!raw || !Array.from(raw).some(ch => !/\s/.test(ch))) raw = '#';
+  const tokens = Array.from(raw);
 
-    // density
-    const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value) || 0.35));
+  // density
+  const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value) || 0.35));
 
-    // seeded-ish rng
-    let seed = Date.now() % 2147483647;
-    const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+  // seeded-ish rng
+  let seed = Date.now() % 2147483647;
+  const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
 
-    const lines = [];
-    for (let y = 0; y < h; y++){
-      let line = '';
-      for (let x = 0; x < w; x++){
-        const t = rand();
-        line += (t > density) ? ' ' : tokens[Math.floor(t * tokens.length)];
+  const lines = [];
+  for (let y = 0; y < h; y++) {
+    let line = '';
+    for (let x = 0; x < w; x++) {
+      const gate = rand(); // for density
+      if (gate > density) {
+        line += ' ';
+      } else {
+        const pick = rand(); // separate draw for character selection
+        const idx = Math.floor(pick * tokens.length);
+        line += tokens[idx];
       }
-      lines.push(line);
     }
-    document.getElementById('ascii-out').textContent = lines.join('\n');
+    lines.push(line);
   }
+  document.getElementById('ascii-out').textContent = lines.join('\n');
+}
 
     // Color math used by both a11y check and contrast
     function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
