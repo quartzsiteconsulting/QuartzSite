@@ -32,9 +32,9 @@
     .nav-inner{max-width:1100px; margin:0 auto; padding:12px 20px env(safe-area-inset-bottom);
       display:flex; align-items:center; justify-content:space-between}
     .logo{height:34px; width:auto; display:block}
-    .nav-cta{display:flex; gap:10px}
+    .nav-cta{display:flex; gap:10px; flex-wrap:wrap}
     .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px;
-      border:1px solid var(--line); background:#0f141c; color:var(--text)}
+      border:1px solid var(--line); background:#0f141c; color:var(--text); font-size:14px}
     .btn[aria-current="page"]{outline:2px solid var(--brand); outline-offset:2px}
 
     /* Hero */
@@ -66,7 +66,7 @@
     label{font-size:12px; color:var(--muted); display:block; margin:4px 0}
     .small{font-size:12px; color:var(--muted)}
     .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
-    .button{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#131a23; color:var(--text); cursor:pointer}
+    .button{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:#131a23; color:var(--text); cursor:pointer; font-size:13px}
     .button.primary{background:linear-gradient(180deg, var(--brand), var(--brand2)); color:#001018; border:none; box-shadow:var(--shadow)}
     pre{background:#0f141c; border:1px solid var(--line); border-radius:12px; padding:12px; overflow:auto; white-space:pre-wrap}
     .divider{height:1px; background:var(--line); margin:18px 0}
@@ -81,6 +81,198 @@
 
     @media (prefers-contrast: more){ .card, .btn, .button{border-color:#9fe6ff} }
     @media (prefers-reduced-motion: reduce){ header.hero::before{animation:none} .crystal-svg{transition:none} }
+
+    /* ===================== Portfolio Section ======================= */
+
+    #portfolio {
+      max-width:1100px;
+      margin:0 auto;
+      padding:32px 20px 40px;
+    }
+
+    #portfolio-heading {
+      margin:0 0 6px;
+      font-size:20px;
+      font-weight:600;
+    }
+
+    .portfolio-kicker {
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      margin:0 0 4px;
+    }
+
+    .portfolio-intro {
+      max-width:720px;
+      margin-bottom:24px;
+    }
+
+    .pf-section {
+      margin-top:26px;
+    }
+
+    .pf-section-heading {
+      font-size:12px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:0 0 10px;
+    }
+
+    .pf-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:18px;
+    }
+
+    @media (min-width:768px) {
+      .pf-grid {
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    .pf-project {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .pf-carousel {
+      background:#05070f;
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+
+    .pf-viewport {
+      position:relative;
+      width:100%;
+      aspect-ratio:4 / 5;
+      background:#000;
+    }
+
+    .pf-slide {
+      position:absolute;
+      inset:0;
+      display:none;
+    }
+
+    .pf-slide.is-active {
+      display:block;
+    }
+
+    .pf-slide img,
+    .pf-slide iframe {
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .pf-embed {
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    .pf-caption {
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:0.6rem 0.8rem;
+      font-size:11px;
+      background:linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0));
+      color:#ffffff;
+      opacity:1;
+      transition:opacity 0.2s ease-out;
+    }
+
+    @media (hover:hover) {
+      .pf-caption {
+        opacity:0;
+      }
+      .pf-slide:hover .pf-caption,
+      .pf-slide:focus-within .pf-caption {
+        opacity:1;
+      }
+    }
+
+    .pf-controls {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:7px 4px 0;
+      gap:8px;
+      font-size:11px;
+    }
+
+    .pf-buttons {
+      display:flex;
+      gap:4px;
+    }
+
+    .pf-button {
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#111720;
+      color:var(--text);
+      padding:2px 10px;
+      font-size:11px;
+      cursor:pointer;
+    }
+
+    .pf-button:hover,
+    .pf-button:focus-visible {
+      background:#1a2330;
+    }
+
+    .pf-select-label {
+      margin-left:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      white-space:nowrap;
+    }
+
+    .pf-select-label span {
+      display:none;
+    }
+
+    @media (min-width:640px) {
+      .pf-select-label span {
+        display:inline;
+      }
+    }
+
+    .pf-select {
+      font-size:11px;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#111720;
+      color:var(--text);
+      max-width:170px;
+    }
+
+    .pf-project-title {
+      font-size:14px;
+      font-weight:500;
+      margin:2px 0 0;
+    }
+
+    .pf-project-meta {
+      font-size:11px;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .pf-project-description {
+      font-size:12px;
+      color:var(--muted);
+      margin:2px 0 0;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +286,8 @@
       </a>
       <div class="nav-cta">
         <a class="btn" href="#tools" aria-current="page">Tools</a>
+        <a class="btn" href="#portfolio">Portfolio</a>
+        <a class="btn" href="#contact">Contact</a>
       </div>
     </div>
   </nav>
@@ -107,6 +301,7 @@
   </header>
 
   <main id="main" tabindex="-1">
+    <!-- ===================== TOOLS ===================== -->
     <section id="tools" aria-labelledby="tools-title">
       <h2 id="tools-title" class="small" style="position:absolute;left:-9999px">Tools</h2>
       <div class="grid">
@@ -261,7 +456,6 @@
             <div style="flex:1">
               <label for="ascii-w">Width (cols)</label>
               <input id="ascii-w" type="number" min="1" max="64" step="1" value="16" />
-
             </div>
             <div style="flex:1">
               <label for="ascii-hgt">Height (rows)</label>
@@ -289,6 +483,212 @@
       <noscript><p class="small">JavaScript is required for these tools. All processing stays in-browser.</p></noscript>
     </section>
 
+    <!-- ===================== PORTFOLIO (drop-in) ===================== -->
+    <!-- Uses /images with letter+number filenames: A01.webp, A02.webp, B01.webp, etc. -->
+    <section id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="portfolio-intro">
+        <p class="small portfolio-kicker">Portfolio</p>
+        <h2 id="portfolio-heading">Selected Work</h2>
+        <p class="muted">
+          Architectural, event, and volunteer projects. Long-form sets are shot primarily on rectilinear wides and normal lenses.
+          More context on <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          and the <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube channel</a>.
+        </p>
+      </div>
+
+      <!-- Architectural -->
+      <div class="pf-section" id="portfolio-architectural">
+        <h3 class="pf-section-heading">Architectural</h3>
+        <div class="pf-grid">
+          <!-- Project A – images only -->
+          <article class="pf-project">
+            <div class="pf-carousel" data-pf-carousel>
+              <div class="pf-viewport">
+                <div class="pf-slide is-active" data-label="A01 — Exterior dusk">
+                  <img src="images/A01.webp" alt="Exterior of a contemporary building at dusk with warm interior light." loading="lazy" />
+                  <div class="pf-caption">Mixed-use exterior, dusk — street frontage and public realm.</div>
+                </div>
+                <div class="pf-slide" data-label="A02 — Lobby">
+                  <img src="images/A02.webp" alt="Lobby interior with warm wood ceilings and minimal seating." loading="lazy" />
+                  <div class="pf-caption">Lobby with timber ceiling and indirect lighting.</div>
+                </div>
+                <div class="pf-slide" data-label="A03 — Roof terrace">
+                  <img src="images/A03.webp" alt="Roof terrace with outdoor seating and city skyline beyond." loading="lazy" />
+                  <div class="pf-caption">Roof terrace and circulation with skyline views.</div>
+                </div>
+              </div>
+              <div class="pf-controls">
+                <div class="pf-buttons">
+                  <button type="button" class="pf-button" data-pf-action="prev" aria-label="Previous image">‹ Prev</button>
+                  <button type="button" class="pf-button" data-pf-action="next" aria-label="Next image">Next ›</button>
+                </div>
+                <label class="pf-select-label">
+                  <span>Jump to:</span>
+                  <select class="pf-select" aria-label="Choose view in this project"></select>
+                </label>
+              </div>
+            </div>
+            <h4 class="pf-project-title">Mixed-Use Courtyard</h4>
+            <div class="pf-project-meta">Toronto · 2024 · Architectural Photography</div>
+            <p class="pf-project-description">
+              Exterior, lobby, and roof-terrace documentation with emphasis on consistent verticals and soft evening light.
+            </p>
+          </article>
+
+          <!-- Project B – stills + YouTube -->
+          <article class="pf-project">
+            <div class="pf-carousel" data-pf-carousel>
+              <div class="pf-viewport">
+                <div class="pf-slide is-active" data-label="B01 — Gallery still">
+                  <img src="images/B01.webp" alt="Gallery interior with clerestory daylight and minimal furniture." loading="lazy" />
+                  <div class="pf-caption">Gallery daylight study — primary exhibition space.</div>
+                </div>
+                <div class="pf-slide" data-label="B02 — Walkthrough video">
+                  <div class="pf-embed">
+                    <!-- Replace YOUTUBE_VIDEO_ID with your actual ID -->
+                    <iframe
+                      src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID"
+                      title="Architectural walkthrough"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+                  </div>
+                  <div class="pf-caption">Walkthrough — circulation, scale, and transitions in motion.</div>
+                </div>
+              </div>
+              <div class="pf-controls">
+                <div class="pf-buttons">
+                  <button type="button" class="pf-button" data-pf-action="prev" aria-label="Previous media">‹ Prev</button>
+                  <button type="button" class="pf-button" data-pf-action="next" aria-label="Next media">Next ›</button>
+                </div>
+                <label class="pf-select-label">
+                  <span>Jump to:</span>
+                  <select class="pf-select" aria-label="Choose media in this project"></select>
+                </label>
+              </div>
+            </div>
+            <h4 class="pf-project-title">Gallery Conversion</h4>
+            <div class="pf-project-meta">Montreal · 2023 · Stills & Motion</div>
+            <p class="pf-project-description">
+              Adaptive-reuse gallery coverage — stills for press kits plus a short walkthrough cut for web and social.
+            </p>
+          </article>
+
+          <!-- Project C – Facebook + still -->
+          <article class="pf-project">
+            <div class="pf-carousel" data-pf-carousel>
+              <div class="pf-viewport">
+                <div class="pf-slide is-active" data-label="C01 — Install timelapse">
+                  <div class="pf-embed">
+                    <!-- Replace FACEBOOK_VIDEO_URL with your public video URL -->
+                    <iframe
+                      src="https://www.facebook.com/plugins/video.php?href=FACEBOOK_VIDEO_URL&show_text=false&width=640"
+                      title="Facade installation timelapse"
+                      loading="lazy"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+                  </div>
+                  <div class="pf-caption">Curtain wall installation — condensed site sequence.</div>
+                </div>
+                <div class="pf-slide" data-label="C02 — Completed elevation">
+                  <img src="images/C01.webp" alt="Completed elevation of curtain wall facade at sunrise." loading="lazy" />
+                  <div class="pf-caption">Completed elevation at sunrise with clean reflections.</div>
+                </div>
+              </div>
+              <div class="pf-controls">
+                <div class="pf-buttons">
+                  <button type="button" class="pf-button" data-pf-action="prev" aria-label="Previous media">‹ Prev</button>
+                  <button type="button" class="pf-button" data-pf-action="next" aria-label="Next media">Next ›</button>
+                </div>
+                <label class="pf-select-label">
+                  <span>Jump to:</span>
+                  <select class="pf-select" aria-label="Choose media in this project"></select>
+                </label>
+              </div>
+            </div>
+            <h4 class="pf-project-title">Curtain Wall Study</h4>
+            <div class="pf-project-meta">Client Name · 2022 · Construction</div>
+            <p class="pf-project-description">
+              Construction-phase and final facade documentation for technical marketing and RFQ responses.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="pf-section" id="portfolio-events">
+        <h3 class="pf-section-heading">Events</h3>
+        <div class="pf-grid">
+          <article class="pf-project">
+            <div class="pf-carousel" data-pf-carousel>
+              <div class="pf-viewport">
+                <div class="pf-slide is-active" data-label="D01 — Opening crowd">
+                  <img src="images/D01.webp" alt="Guests mingling in a tall lobby during an opening event." loading="lazy" />
+                  <div class="pf-caption">Opening event — lobby in use, people against architecture.</div>
+                </div>
+                <div class="pf-slide" data-label="D02 — Quiet detail">
+                  <img src="images/D02.webp" alt="Detail of catering and soft lamp light on a table." loading="lazy" />
+                  <div class="pf-caption">Quiet moments: small vignettes and material details.</div>
+                </div>
+              </div>
+              <div class="pf-controls">
+                <div class="pf-buttons">
+                  <button type="button" class="pf-button" data-pf-action="prev" aria-label="Previous image">‹ Prev</button>
+                  <button type="button" class="pf-button" data-pf-action="next" aria-label="Next image">Next ›</button>
+                </div>
+                <label class="pf-select-label">
+                  <span>Jump to:</span>
+                  <select class="pf-select" aria-label="Choose view in this project"></select>
+                </label>
+              </div>
+            </div>
+            <h4 class="pf-project-title">Lobby Opening</h4>
+            <div class="pf-project-meta">Event Photography</div>
+            <p class="pf-project-description">
+              Low-key event coverage anchored to the space — minimal flash, emphasis on ambient light.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Volunteer -->
+      <div class="pf-section" id="portfolio-volunteer">
+        <h3 class="pf-section-heading">Volunteer</h3>
+        <div class="pf-grid">
+          <article class="pf-project">
+            <div class="pf-carousel" data-pf-carousel>
+              <div class="pf-viewport">
+                <div class="pf-slide is-active" data-label="E01 — Exterior">
+                  <img src="images/E01.webp" alt="Community centre exterior with families arriving." loading="lazy" />
+                  <div class="pf-caption">Community centre exterior — pro bono documentation for a non-profit.</div>
+                </div>
+                <div class="pf-slide" data-label="E02 — Workshop">
+                  <img src="images/E02.webp" alt="Interior workshop space with children drawing around tables." loading="lazy" />
+                  <div class="pf-caption">Workshop space in use — documenting how the architecture supports programs.</div>
+                </div>
+              </div>
+              <div class="pf-controls">
+                <div class="pf-buttons">
+                  <button type="button" class="pf-button" data-pf-action="prev" aria-label="Previous image">‹ Prev</button>
+                  <button type="button" class="pf-button" data-pf-action="next" aria-label="Next image">Next ›</button>
+                </div>
+                <label class="pf-select-label">
+                  <span>Jump to:</span>
+                  <select class="pf-select" aria-label="Choose view in this project"></select>
+                </label>
+              </div>
+            </div>
+            <h4 class="pf-project-title">Community Centre</h4>
+            <div class="pf-project-meta">Volunteer · Non-profit</div>
+            <p class="pf-project-description">
+              Volunteer architectural and event coverage for a non-profit community hub, with assets donated for their communications.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
     <section id="contact" aria-labelledby="contact-title">
       <div class="grid">
         <article class="card span-12">
@@ -332,8 +732,9 @@
     </a>
   </footer>
 
+  <!-- Original tools script -->
   <script>
-    /* ==== Crystal physics (as requested): spin only, no scroll; keeps momentum feel and resets ===== */
+    /* ==== Crystal physics (spin only) ===== */
     let rotationDegrees = 0;
     let lastTimeoutId = null;
     function spinCrystal(e){
@@ -362,6 +763,30 @@
       }
     }
 
+    /* ---------- Color math shared ---------- */
+    function parseHex(h){
+      h=h.replace('#','');
+      if(h.length===3){
+        h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join('');
+      }
+      const n=parseInt(h,16)||0;
+      return {r:(n>>16)&255,g:(n>>8)&255,b:n&255};
+    }
+    function srgbToLin(c){
+      c/=255;
+      return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4);
+    }
+    function relLuminance(hex){
+      const {r,g,b}=parseHex(hex);
+      return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b);
+    }
+    function wcagRatio(fg,bg){
+      const L1=relLuminance(fg);
+      const L2=relLuminance(bg);
+      const [a,b] = L1>L2? [L1,L2] : [L2,L1];
+      return (a+0.05)/(b+0.05);
+    }
+
     /* ---------- A11y Inspector ---------- */
     function runA11y(){
       const input=document.getElementById('a11y-input').value.trim();
@@ -370,7 +795,8 @@
       const doc=new DOMParser().parseFromString(input,'text/html');
       const issues=[];
       // lang on html
-      const htmlEl=doc.documentElement; if(htmlEl && !htmlEl.getAttribute('lang')) issues.push('❗ <code>&lt;html&gt;</code> is missing a <code>lang</code> attribute.');
+      const htmlEl=doc.documentElement;
+      if(htmlEl && !htmlEl.getAttribute('lang')) issues.push('❗ <code>&lt;html&gt;</code> is missing a <code>lang</code> attribute.');
       // images alt
       doc.querySelectorAll('img').forEach((img,i)=>{ if(!img.hasAttribute('alt')) issues.push(`❗ <code>&lt;img&gt;</code> #${i+1} missing <code>alt</code>.`); });
       // buttons/links name
@@ -405,10 +831,6 @@
     }
 
     /* ---------- Contrast Checker ---------- */
-    function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
-    function srgbToLin(c){ c/=255; return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
-    function relLuminance(hex){ const {r,g,b}=parseHex(hex); return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b); }
-    function wcagRatio(fg,bg){ const L1=relLuminance(fg); const L2=relLuminance(bg); const [a,b] = L1>L2? [L1,L2] : [L2,L1]; return (a+0.05)/(b+0.05); }
     function checkContrast(){
       const fg=document.getElementById('fg').value.trim();
       const bg=document.getElementById('bg').value.trim();
@@ -421,7 +843,12 @@
       document.getElementById('contrast-results').innerText = `Contrast ratio: ${ratio.toFixed(2)}:1 — ${aa} / ${aaa}`;
       const prev=document.getElementById('contrast-preview'); prev.style.color=fg; prev.style.background=bg; prev.innerHTML='Preview — The quick brown fox';
     }
-    function swapColors(){ const fg=document.getElementById('fg'); const bg=document.getElementById('bg'); [fg.value,bg.value]=[bg.value,fg.value]; checkContrast(); }
+    function swapColors(){
+      const fg=document.getElementById('fg');
+      const bg=document.getElementById('bg');
+      [fg.value,bg.value]=[bg.value,fg.value];
+      checkContrast();
+    }
 
     /* ---------- Meta/OG ---------- */
     function esc(s){ return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
@@ -446,11 +873,14 @@
     /* ---------- JSON-LD ---------- */
     function genJSONLD(){
       const data = {
-        '@context':'https://schema.org', '@type': document.getElementById('org-type').value,
-        name: document.getElementById('org-name').value.trim(), url: document.getElementById('org-url').value.trim(),
+        '@context':'https://schema.org',
+        '@type': document.getElementById('org-type').value,
+        name: document.getElementById('org-name').value.trim(),
+        url: document.getElementById('org-url').value.trim(),
         logo: document.getElementById('org-logo').value.trim()
       };
-      const same = document.getElementById('org-same').value.trim(); if(same){ data.sameAs = same.split(',').map(s=>s.trim()).filter(Boolean); }
+      const same = document.getElementById('org-same').value.trim();
+      if(same){ data.sameAs = same.split(',').map(s=>s.trim()).filter(Boolean); }
       const json = `<script type="application/ld+json">\n${JSON.stringify(data,null,2)}\n<\/script>`;
       document.getElementById('jsonld-out').innerText = json;
     }
@@ -482,53 +912,103 @@
 
     /* ---------- Minify ---------- */
     function minifyHTML(){
-      const src=document.getElementById('min-in').value; if(!src){ document.getElementById('min-out').innerText='/* paste HTML first */'; return; }
+      const src=document.getElementById('min-in').value;
+      if(!src){ document.getElementById('min-out').innerText='/* paste HTML first */'; return; }
       let out=src.replace(/\n+/g,' ').replace(/\s{2,}/g,' ').replace(/>\s+</g,'><').trim();
       out=out.replace(/><(script|link|meta|title|div|section|header|footer)/g,">\n<$1");
       document.getElementById('min-out').innerText=out;
     }
 
     /* ---------- ASCII Randomizer ---------- */
-      function genASCII(){
-  // dimensions (clamped to 1–64)
-  const w = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
-  const h = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
+    function genASCII(){
+      const w = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-w').value, 10) || 16));
+      const h = Math.max(1, Math.min(64, parseInt(document.getElementById('ascii-hgt').value, 10) || 16));
 
-  // charset (support Unicode; ensure at least one visible char)
-  let raw = document.getElementById('ascii-charset').value;
-  if (!raw || !Array.from(raw).some(ch => !/\s/.test(ch))) raw = '#';
-  const tokens = Array.from(raw);
+      let raw = document.getElementById('ascii-charset').value;
+      if (!raw || !Array.from(raw).some(ch => !/\s/.test(ch))) raw = '#';
+      const tokens = Array.from(raw);
 
-  // density
-  const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value) || 0.35));
+      const density = Math.max(0, Math.min(1, parseFloat(document.getElementById('ascii-density').value) || 0.35));
 
-  // seeded-ish rng
-  let seed = Date.now() % 2147483647;
-  const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
+      let seed = Date.now() % 2147483647;
+      const rand = () => (seed = (seed * 48271) % 2147483647) / 2147483647;
 
-  const lines = [];
-  for (let y = 0; y < h; y++) {
-    let line = '';
-    for (let x = 0; x < w; x++) {
-      const gate = rand(); // for density
-      if (gate > density) {
-        line += ' ';
-      } else {
-        const pick = rand(); // separate draw for character selection
-        const idx = Math.floor(pick * tokens.length);
-        line += tokens[idx];
+      const lines = [];
+      for (let y = 0; y < h; y++) {
+        let line = '';
+        for (let x = 0; x < w; x++) {
+          const gate = rand();
+          if (gate > density) {
+            line += ' ';
+          } else {
+            const pick = rand();
+            const idx = Math.floor(pick * tokens.length);
+            line += tokens[idx];
+          }
+        }
+        lines.push(line);
       }
+      document.getElementById('ascii-out').textContent = lines.join('\n');
     }
-    lines.push(line);
-  }
-  document.getElementById('ascii-out').textContent = lines.join('\n');
-}
+  </script>
 
-    // Color math used by both a11y check and contrast
-    function parseHex(h){ h=h.replace('#',''); if(h.length===3){ h=[h[0]+h[0],h[1]+h[1],h[2]+h[2]].join(''); } const n=parseInt(h,16)||0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
-    function srgbToLin(c){ c/=255; return c<=0.04045? c/12.92 : Math.pow((c+0.055)/1.055,2.4); }
-    function relLuminance(hex){ const {r,g,b}=parseHex(hex); return 0.2126*srgbToLin(r)+0.7152*srgbToLin(g)+0.0722*srgbToLin(b); }
-    function wcagRatio(fg,bg){ const L1=relLuminance(fg); const L2=relLuminance(bg); const [a,b] = L1>L2? [L1,L2] : [L2,L1]; return (a+0.05)/(b+0.05); }
+  <!-- Portfolio carousel script (separate, non-conflicting) -->
+  <script>
+    (function(){
+      function setupPfCarousel(root){
+        const slides = Array.from(root.querySelectorAll('.pf-slide'));
+        if(!slides.length) return;
+
+        const select = root.querySelector('.pf-select');
+        const prevBtn = root.querySelector('[data-pf-action="prev"]');
+        const nextBtn = root.querySelector('[data-pf-action="next"]');
+
+        slides.forEach((slide, index) => {
+          const label = slide.getAttribute('data-label') || `Item ${index+1}`;
+          const option = document.createElement('option');
+          option.value = String(index);
+          option.textContent = label;
+          if(slide.classList.contains('is-active')) option.selected = true;
+          select.appendChild(option);
+        });
+
+        let currentIndex = slides.findIndex(s => s.classList.contains('is-active'));
+        if(currentIndex === -1) currentIndex = 0;
+
+        function showSlide(idx){
+          slides.forEach((s,i)=> s.classList.toggle('is-active', i===idx));
+          select.value = String(idx);
+          currentIndex = idx;
+        }
+        showSlide(currentIndex);
+
+        function go(delta){
+          const next = (currentIndex + delta + slides.length) % slides.length;
+          showSlide(next);
+        }
+
+        if(prevBtn) prevBtn.addEventListener('click', ()=>go(-1));
+        if(nextBtn) nextBtn.addEventListener('click', ()=>go(1));
+
+        select.addEventListener('change', ()=>{
+          const idx = parseInt(select.value,10);
+          if(!Number.isNaN(idx)) showSlide(idx);
+        });
+
+        const controls = root.querySelector('.pf-controls');
+        if(controls){
+          controls.addEventListener('keydown', (event)=>{
+            if(event.key === 'ArrowLeft'){
+              event.preventDefault(); go(-1);
+            } else if(event.key === 'ArrowRight'){
+              event.preventDefault(); go(1);
+            }
+          });
+        }
+      }
+
+      document.querySelectorAll('[data-pf-carousel]').forEach(setupPfCarousel);
+    })();
   </script>
 </body>
 </html>
